@@ -10,62 +10,100 @@ import UIKit
 import SnapKit
 import Then
 
-class SortButton: UIButton {
+class SortButton: BaseView {
     
-    private let sortTitleLabel = UILabel()
-    private let sortIcon = UIImageView()
+    var onSelect: ((Int) -> Void)?
+    private var selectedIndex = 0
+    
+    private let popularButton = UIButton()
+    private let latestButton = UIButton()
+    
+    private lazy var buttons = [popularButton, latestButton]
     
     private let sortStackView = UIStackView()
+    
+    private let selectedBackgroundColor: UIColor = .gray800
+    private let normalTextColor: UIColor = .gray300
+    private let selectedTextColor: UIColor = .gray100
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setUI()
-        setLayout()
-        setStyle()
+        setAction()
+        updateSelection()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUI() {
-        sortStackView.addArrangedSubviews(sortTitleLabel, sortIcon)
+    override func setUI() {
+        sortStackView.addArrangedSubviews(popularButton, latestButton)
         addSubviews(sortStackView)
     }
     
-    private func setLayout() {
-        sortIcon.snp.makeConstraints {
-            $0.width.equalTo(9.5)
-            $0.height.equalTo(4.5)
+    override func setLayout() {
+        popularButton.snp.makeConstraints {
+            $0.height.equalTo(27)
+        }
+        
+        latestButton.snp.makeConstraints {
+            $0.width.equalTo(popularButton)
+            $0.height.equalTo(27)
         }
         
         sortStackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.verticalEdges.equalToSuperview().inset(2)
+            $0.horizontalEdges.equalToSuperview()
         }
     }
     
-    private func setStyle() {
+    override func setStyle() {
         backgroundColor = .white
         layer.cornerRadius = 15.5
         clipsToBounds = true
         
-        sortIcon.do {
-            $0.image = UIImage(systemName: "chevron.down")
-            $0.tintColor = .black
+        popularButton.do {
+            $0.setTitle("인기순", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.titleLabel?.font = .caption_sb_12
+            $0.layer.cornerRadius = 13
+            $0.clipsToBounds = true
         }
         
-        sortTitleLabel.do {
-            $0.text = "인기순"
-            $0.textColor = .black
-            $0.font = .body_sb_14
+        latestButton.do {
+            $0.setTitle("최신순", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.titleLabel?.font = .caption_sb_12
+            $0.layer.cornerRadius = 13
+            $0.clipsToBounds = true
         }
         
         sortStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 6.75
             $0.alignment = .center
-            $0.isUserInteractionEnabled = false
+            $0.distribution = .fillEqually
+        }
+    }
+    
+    private func setAction() {
+        buttons.enumerated().forEach { index, button in
+            button.tag = index
+            button.addTarget(self, action: #selector(buttonDidTap(_:)), for: .touchUpInside)
+        }
+    }
+
+    @objc private func buttonDidTap(_ sender: UIButton) {
+        selectedIndex = sender.tag
+        updateSelection()
+        onSelect?(selectedIndex)
+    }
+
+    private func updateSelection() {
+        buttons.enumerated().forEach { index, button in
+            let isSelected = (index == selectedIndex)
+            button.backgroundColor = isSelected ? selectedBackgroundColor : .clear
+            button.setTitleColor(isSelected ? selectedTextColor : normalTextColor, for: .normal)
         }
     }
 }
