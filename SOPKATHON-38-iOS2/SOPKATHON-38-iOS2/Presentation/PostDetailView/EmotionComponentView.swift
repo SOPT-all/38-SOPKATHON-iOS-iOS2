@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class EmotionComponent: BaseView {
+final class EmotionComponentView: BaseView {
     
     // MARK: - UI Components
     
@@ -31,41 +31,62 @@ final class EmotionComponent: BaseView {
     // MARK: - Custom Methods
     
     override func setStyle() {
+        
+        backgroundColor = .clear
+        
         containerView.do {
-            $0.backgroundColor = .lightGray
+            $0.backgroundColor = UIColor.white.withAlphaComponent(0.2)
             $0.layer.cornerRadius = 28
+            $0.clipsToBounds = true
         }
     }
     
     override func setUI() {
+        
         addSubview(containerView)
+        
+        var previousView: UIView?
         
         for (index, emotion) in emotions.enumerated() {
             
             let buttonContainer = UIStackView()
-            buttonContainer.axis = .vertical
-            buttonContainer.alignment = .center
-            buttonContainer.spacing = 4
+            buttonContainer.do {
+                $0.axis = .vertical
+                $0.alignment = .center
+                $0.spacing = 4
+            }
             
-            let button = UIButton()
+            let button = UIButton(type: .system)
+
             button.do {
-                $0.setTitle(emotion.emoji, for: .normal)
-                $0.titleLabel?.font = .systemFont(ofSize: 24)
-                $0.backgroundColor = .gray
+                
+                let attributedTitle = NSAttributedString(
+                    string: emotion.emoji,
+                    attributes: [
+                        .font: UIFont.systemFont(ofSize: 22)
+                    ]
+                )
+                
+                $0.setAttributedTitle(attributedTitle, for: .normal)
+                
+                $0.backgroundColor = UIColor.black.withAlphaComponent(0.15)
                 $0.layer.cornerRadius = 19
+                $0.clipsToBounds = true
                 $0.tag = index
+                
                 $0.addTarget(
                     self,
                     action: #selector(emotionButtonDidTap(_:)),
                     for: .touchUpInside
                 )
             }
-            
             let countLabel = UILabel()
+            
             countLabel.do {
                 $0.text = "\(emotion.count)"
                 $0.textColor = .white
                 $0.font = .systemFont(ofSize: 12, weight: .medium)
+                $0.textAlignment = .center
             }
             
             emotionButtons.append(button)
@@ -81,27 +102,28 @@ final class EmotionComponent: BaseView {
             }
             
             buttonContainer.snp.makeConstraints {
-                $0.top.bottom.equalToSuperview().inset(14)
+                $0.centerY.equalToSuperview()
                 
-                if index == 0 {
-                    $0.leading.equalToSuperview().inset(16)
+                if let previousView {
+                    $0.leading.equalTo(previousView.snp.trailing).offset(12)
                 } else {
-                    $0.leading.equalTo(
-                        emotionButtons[index - 1].superview!.snp.trailing
-                    ).offset(12)
+                    $0.leading.equalToSuperview().inset(16)
                 }
                 
                 if index == emotions.count - 1 {
                     $0.trailing.equalToSuperview().inset(16)
                 }
             }
+            
+            previousView = buttonContainer
         }
     }
     
     override func setLayout() {
         containerView.snp.makeConstraints {
-            $0.width.equalTo(267)
             $0.edges.equalToSuperview()
+            $0.width.equalTo(267)
+            $0.height.equalTo(74)
         }
     }
     

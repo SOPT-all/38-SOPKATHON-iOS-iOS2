@@ -11,4 +11,13 @@ extension UIView {
     func addSubviews(_ views: UIView...) {
         views.forEach { self.addSubview($0) }
     }
+    
+    func roundBottomCorners(radius: CGFloat) {
+            layer.cornerRadius = radius
+            layer.maskedCorners = [
+                .layerMinXMaxYCorner,
+                .layerMaxXMaxYCorner
+            ]
+            clipsToBounds = true
+        }
 }

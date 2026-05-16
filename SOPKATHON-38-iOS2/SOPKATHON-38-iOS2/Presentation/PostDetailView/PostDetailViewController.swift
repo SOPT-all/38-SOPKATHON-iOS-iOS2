@@ -25,19 +25,18 @@ final class PostDetailViewController: BaseViewController {
     // MARK: - Custom Methods
     
     private func setUI() {
-        view.backgroundColor = .gray300
+        view.backgroundColor = .white
         view.addSubview(rootView)
         navigationBar.configure (
             title: "전문 읽기",
-            showBackButton: false,
-            backgroundColor: .gray300
+            showBackButton: true
         )
     }
     
     private func setLayout() {
         rootView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
-            $0.horizontalEdges.equalToSuperview().inset(19)
+            $0.horizontalEdges.equalToSuperview()
         }
     }
 }
