@@ -27,7 +27,7 @@ final class PostContentsView: BaseView {
         clipsToBounds = true
         
         backgroundImageView.do {
-            $0.image = UIImage(named: "piggu_heart")
+            $0.image = UIImage(named: "image_heart")
         }
     }
     
@@ -53,7 +53,7 @@ final class PostContentsView: BaseView {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(267)
             $0.height.equalTo(56)
-            $0.bottom.equalToSuperview().inset(28)
+            $0.bottom.equalToSuperview().inset(26)
         }
     }
 }
