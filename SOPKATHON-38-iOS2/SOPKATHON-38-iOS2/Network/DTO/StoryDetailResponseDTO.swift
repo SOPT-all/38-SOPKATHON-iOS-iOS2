@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct StoryDetailResponseDTO: Decodable {
-    let success: Bool
-    let status: Int?
-    let code: String
-    let message: String
-    let data: StoryDetailData?
-}
+//struct StoryDetailResponseDTO: Decodable {
+//    let success: Bool
+//    let status: Int?
+//    let code: String
+//    let message: String
+//    let data: StoryDetailData?
+//}
 
 struct StoryDetailData: Decodable {
     let storyId: Int

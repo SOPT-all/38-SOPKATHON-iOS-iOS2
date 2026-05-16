@@ -11,6 +11,7 @@ import SnapKit
 import Then
 
 final class PostDetailViewController: BaseViewController {
+    private let storyDetailService = DefaultStoryDetailService()
     
     private let rootView = UIView()
     private let postContentsView = PostContentsView()
@@ -33,6 +34,7 @@ final class PostDetailViewController: BaseViewController {
         setStyle()
         setUI()
         setLayout()
+        getPosts()
     }
     
     override func configureNavigationBar() {
@@ -107,6 +109,24 @@ final class PostDetailViewController: BaseViewController {
             $0.top.equalToSuperview().inset(12)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(48)
+        }
+    }
+    
+    private func getPosts() {
+        Task {
+            do {
+                let response = try await storyDetailService.getStoryDetail(storyId: 1, userId: 1)
+//                if let title = response.title, let content = response.content{
+//                    await MainActor.run {
+//                        self.postContentsView.postSubContentsView.configure(title: title, content: content)
+//                    }
+//                }
+                await MainActor.run {
+                    self.postContentsView.postSubContentsView.configure(title: response.title, content: response.content)
+                }
+            } catch {
+                print("🔴 에러: \(error)")
+            }
         }
     }
 }

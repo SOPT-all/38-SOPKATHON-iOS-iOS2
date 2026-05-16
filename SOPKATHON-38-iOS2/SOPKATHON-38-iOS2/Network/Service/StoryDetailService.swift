@@ -8,19 +8,18 @@
 import Foundation
 
 protocol StoryDetailService {
-    func getStoryDetail(storyId: Int) async throws -> StoryDetailResponseDTO
+    func getStoryDetail(storyId: Int, userId: Int) async throws -> StoryDetailData
 }
 
 final class DefaultStoryDetailService: StoryDetailService {
     
     private let network = NetworkService.shared
     
-    func getStoryDetail(storyId: Int) async throws -> StoryDetailResponseDTO {
+    func getStoryDetail(storyId: Int, userId: Int) async throws -> StoryDetailData {
         do {
-            let response: StoryDetailResponseDTO = try await network.request(
-                endPoint: .getStoryDetail(storyId)
+            let response: StoryDetailData = try await network.request(
+                endPoint: .getStoryDetail(storyId: storyId, userId: userId)
             )
-            //TO-DO endPoint에 추가 필요
             
             return response
             
@@ -31,33 +30,33 @@ final class DefaultStoryDetailService: StoryDetailService {
     }
 }
 
-final class MockStoryDetailService: StoryDetailService {
-    
-    func getStoryDetail(storyId: Int) async throws -> StoryDetailResponseDTO {
-        
-        return StoryDetailResponseDTO(
-            success: true,
-            status: nil,
-            code: "SUCCESS_200",
-            message: "요청이 성공했습니다.",
-            data: StoryDetailData(
-                storyId: 1,
-                spotName: "한강공원",
-                userId: 1,
-                nickname: "익명 1",
-                title: "한강밤",
-                content: "스토리 본문입니다.",
-                storyType: "MEMORY",
-                reactionCounts: ReactionCounts(
-                    LIKE: 12,
-                    EMPATHY: 3,
-                    SURPRISE: 0,
-                    SAD: 1
-                ),
-                myReactionType: "LIKE",
-                commentCount: 3,
-                createdAt: "2026-05-17T12:00:00Z"
-            )
-        )
-    }
-}
+//final class MockStoryDetailService: StoryDetailService {
+//    
+//    func getStoryDetail(storyId: Int, userId: Int) async throws -> StoryDetailData {
+//        
+//        return StoryDetailData(
+//            success: true,
+//            status: nil,
+//            code: "SUCCESS_200",
+//            message: "요청이 성공했습니다.",
+//            data: StoryDetailData(
+//                storyId: 1,
+//                spotName: "한강공원",
+//                userId: 1,
+//                nickname: "익명 1",
+//                title: "한강밤",
+//                content: "스토리 본문입니다.",
+//                storyType: "MEMORY",
+//                reactionCounts: ReactionCounts(
+//                    LIKE: 12,
+//                    EMPATHY: 3,
+//                    SURPRISE: 0,
+//                    SAD: 1
+//                ),
+//                myReactionType: "LIKE",
+//                commentCount: 3,
+//                createdAt: "2026-05-17T12:00:00Z"
+//            )
+//        )
+//    }
+//}
