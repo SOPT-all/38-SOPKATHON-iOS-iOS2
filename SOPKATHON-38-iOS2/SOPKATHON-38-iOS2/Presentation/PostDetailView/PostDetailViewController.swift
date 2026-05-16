@@ -28,7 +28,9 @@ final class PostDetailViewController: BaseViewController {
         setLayout()
     }
     
-    // MARK: - Custom Methods
+    override var shouldShowNavigationBar: Bool {
+        return true
+    }
     
     private func setStyle() {
         
@@ -61,6 +63,10 @@ final class PostDetailViewController: BaseViewController {
         commentBoxView.addSubview(postCommentView)
         
         navigationBar.configure(
+    // MARK: - Custom Methods
+
+    override func configureNavigationBar() {
+        navigationBar.configure (
             title: "전문 읽기",
             showBackButton: true
         )

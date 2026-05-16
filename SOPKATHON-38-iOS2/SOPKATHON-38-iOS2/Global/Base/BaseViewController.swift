@@ -12,12 +12,21 @@ import SnapKit
 class BaseViewController: UIViewController {
     
     let navigationBar = TopNavigationBar()
+    
+    var contentRootView: UIView? {
+        return nil
+    }
+    
+    var shouldShowNavigationBar: Bool {
+        return false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad 호출 - \(type(of: self))")
         
         baseSetUI()
+        configureNavigationBar()
         baseSetLayout()
 
         setAddTarget()
@@ -46,16 +55,38 @@ class BaseViewController: UIViewController {
     }
     
     private func baseSetUI() {
-        view.addSubview(navigationBar)
+        if let contentRootView {
+            view.addSubview(contentRootView)
+        }
+        
+        if shouldShowNavigationBar {
+            view.addSubview(navigationBar)
+        }
     }
     
     private func baseSetLayout() {
-        navigationBar.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(statusBarHeight + 60)
+        if shouldShowNavigationBar {
+            navigationBar.snp.makeConstraints {
+                $0.top.equalToSuperview()
+                $0.horizontalEdges.equalToSuperview()
+                $0.height.equalTo(statusBarHeight + 60)
+            }
+        }
+        
+        if let contentRootView {
+            contentRootView.snp.makeConstraints {
+                if shouldShowNavigationBar {
+                    $0.top.equalTo(navigationBar.snp.bottom)
+                } else {
+                    $0.top.equalToSuperview()
+                }
+                
+                $0.horizontalEdges.bottom.equalToSuperview()
+            }
         }
     }
+    
+    func configureNavigationBar() {}
 
     func setAddTarget() {}
 
