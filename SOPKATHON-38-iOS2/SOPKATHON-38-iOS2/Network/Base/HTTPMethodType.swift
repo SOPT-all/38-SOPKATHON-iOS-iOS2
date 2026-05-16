@@ -32,7 +32,7 @@ enum HeaderType {
         case .auth:
             [
                 "Content-Type": "application/json",
-                "profile_id": "1"
+                "userId": "1"
             ]
         case .basic:
             ["Content-Type": "application/json"]

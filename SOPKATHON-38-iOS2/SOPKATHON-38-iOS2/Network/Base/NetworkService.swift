@@ -77,8 +77,8 @@ extension NetworkService {
                 throw NetworkError.noData
             }
             
-            guard (200...299).contains(decoded.code) else {
-                throw NetworkError.serverErrorMessage(decoded.msg)
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw NetworkError.serverErrorMessage(decoded.message)
             }
             
             return data

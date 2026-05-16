@@ -11,6 +11,7 @@ enum EndPoint {
     case testPost
     case test(Int)
     case parameterExample
+    case getList(userId: Int, sort: String = "latest")
     case getStoryDetail(Int)
     
     var requestType: HTTPMethodType {
@@ -21,6 +22,8 @@ enum EndPoint {
         case .test,
              .parameterExample,
              .getStoryDetail:
+            return .get
+        case .getList:
             return .get
         }
     }
@@ -35,6 +38,9 @@ enum EndPoint {
             
         case .parameterExample:
             return "/api/v1/test?name=kim"
+        case .getList(let userId, let sort):
+            return "/api/v1/spots/stories?userId=\(userId)&sort=\(sort)"
+
             
         case .getStoryDetail(let storyId):
             return "/api/v1/stories/\(storyId)"
@@ -43,9 +49,8 @@ enum EndPoint {
     
     var header: [String: String] {
         switch self {
-        case .testPost, .test:
-            return HeaderType.basic.value
-            
+        case .testPost, .test, .getList:
+            HeaderType.basic.value
         case .parameterExample,
              .getStoryDetail:
             return HeaderType.auth.value

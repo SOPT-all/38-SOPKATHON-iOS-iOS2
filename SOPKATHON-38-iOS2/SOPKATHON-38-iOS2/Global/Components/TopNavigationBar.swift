@@ -30,6 +30,7 @@ final class TopNavigationBar: BaseView {
         backButton.do {
             $0.setImage(.icChevronLeft, for: .normal)
             $0.tintColor = .black
+            $0.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
         
         titleLabel.do {
@@ -53,10 +54,6 @@ final class TopNavigationBar: BaseView {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(backButton)
         }
-    }
-    
-    private func setAddTarget() {
-        backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
     }
     
     // MARK: - Public Method
