@@ -1,5 +1,5 @@
 # 38-SOPKATHON-iOS-iOS2
-38기 솝커톤 iOS 2팀 iOS 레포
+38기 솝커톤 iOS 2팀 iOS PINGO 레포
 
 # 서비스 소개
 
@@ -9,10 +9,11 @@
 | :---: | :---: | :---: |
 | <img width="360" height="360" alt="가나디2" src="https://github.com/user-attachments/assets/7657f40e-1d65-4f71-83d0-6472088b75d2" /> | <img width="360" alt="가나디1" src="https://github.com/user-attachments/assets/0076a5aa-fa4b-4061-8ce6-3c7eeb01bfb9" /> | <img width="348" height="352" alt="가나디3" src="https://github.com/user-attachments/assets/0ee11853-12a1-4eab-b0d6-e9554cf0ac17" /> |
 | `iOS Lead Developer` | `iOS Developer` | `iOS Developer` |
+| `MAP View(AvatarControll), CreatePostView` | `PostListView(PostList GET API)` | `PostDetailView(Expression of emotion API)` |
 
 # 주요 기능 및 기술 스택
 
-## 🚆 Library & Framework
+## Library & Framework
 
 | Category | Library / Framework | Description |
 |-----------|-----------|------|
@@ -32,7 +33,7 @@
 이슈 번호에 맞는 `feature` 브랜치를 `main`에서 분기하여 작업을 진행하고, 작업이 끝나면 PR을 `main` 브랜치로 올립니다.
 ```
 
-## 🚄 Convention
+## Convention
 ### Branch
 `종류/#이슈번호`
 ```
