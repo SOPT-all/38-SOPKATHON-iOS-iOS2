@@ -12,7 +12,9 @@ import Then
 
 final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    private let titleLabel = UILabel()
+    private let iconView = UIImageView()
+    private let titleLabel1 = UILabel()
+    private let titleLabel2 = UILabel()
     private let sortButton = SortButton()
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: make())
@@ -31,24 +33,35 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     }
     
     override func setUI() {
-        addSubviews(titleLabel, sortButton, collectionView, addButton)
+        addSubviews(iconView, titleLabel1, titleLabel2, sortButton, collectionView)
     }
     
     override func setLayout() {
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(45)
-            $0.leading.equalToSuperview().inset(20)
+        iconView.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).inset(39)
+            $0.leading.equalToSuperview().inset(16)
+            $0.size.equalTo(30)
+        }
+        
+        titleLabel1.snp.makeConstraints {
+            $0.centerY.equalTo(iconView)
+            $0.leading.equalTo(iconView.snp.trailing)
+        }
+        
+        titleLabel2.snp.makeConstraints {
+            $0.centerY.equalTo(iconView)
+            $0.leading.equalTo(titleLabel1.snp.trailing)
         }
         
         sortButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(43)
+            $0.centerY.equalTo(titleLabel1)
             $0.trailing.equalToSuperview().inset(16)
-            $0.width.equalTo(77)
+            $0.width.equalTo(106)
             $0.height.equalTo(31)
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(14)
+            $0.top.equalTo(iconView.snp.bottom).offset(17)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(150)
         }
@@ -63,10 +76,20 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     override func setStyle() {
         backgroundColor = .gray100
         
-        titleLabel.do {
-            $0.text = "지금 여기의 이야기..."
+        iconView.do {
+            $0.image = UIImage(resource: .iconFireworks)
+        }
+        
+        titleLabel1.do {
+            $0.text = "라인프렌즈"
             $0.font = .body_sb_18
-            $0.textColor = .black
+            $0.textColor = .main500
+        }
+        
+        titleLabel2.do {
+            $0.text = "의 이야기"
+            $0.font = .body_sb_18
+            $0.textColor = .gray900
         }
         
         collectionView.do {
