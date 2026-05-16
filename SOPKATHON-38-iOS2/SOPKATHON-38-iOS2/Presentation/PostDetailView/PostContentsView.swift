@@ -29,6 +29,29 @@ final class PostContentsView: BaseView {
         backgroundImageView.do {
             $0.image = UIImage(named: "image_heart")
         }
+        
+        emotionComponentView.emotionButtonTapAction = { [weak self] index in
+            
+            switch index {
+            case 0:
+                self?.backgroundImageView.image = UIImage(named: "image_heart")
+                
+            case 1:
+                self?.backgroundImageView.image = UIImage(named: "image_enjoy")
+                
+            case 2:
+                self?.backgroundImageView.image = UIImage(named: "image_nofeeling")
+                
+            case 3:
+                self?.backgroundImageView.image = UIImage(named: "image_surprised")
+                
+            case 4:
+                self?.backgroundImageView.image = UIImage(named: "image_bewildered")
+                
+            default:
+                break
+            }
+        }
     }
     
     override func setUI() {

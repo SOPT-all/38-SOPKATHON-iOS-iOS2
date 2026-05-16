@@ -12,6 +12,8 @@ import Then
 
 final class EmotionComponentView: BaseView {
     
+    var emotionButtonTapAction: ((Int) -> Void)?
+    
     // MARK: - UI Components
     
     private let containerView = UIView()
@@ -104,6 +106,8 @@ final class EmotionComponentView: BaseView {
     private func emotionButtonDidTap(_ sender: UIButton) {
         
         sender.backgroundColor = .main500.withAlphaComponent(0.7)
+        
+        emotionButtonTapAction?(sender.tag)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
             sender.backgroundColor = UIColor.black.withAlphaComponent(0.15)
