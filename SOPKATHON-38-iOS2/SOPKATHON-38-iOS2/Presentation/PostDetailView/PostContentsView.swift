@@ -16,7 +16,6 @@ final class PostContentsView: BaseView {
     
     private let postSubContentsView = PostSubContentsView()
     private let backgroundImageView = UIImageView()
-    private let piggoImageView = UIImageView()
     private let emotionComponentView = EmotionComponentView()
     
     // MARK: - Custom Methods
@@ -28,19 +27,13 @@ final class PostContentsView: BaseView {
         clipsToBounds = true
         
         backgroundImageView.do {
-            $0.image = UIImage(named: "piggo")
-        }
-        
-        piggoImageView.do {
-            $0.image = UIImage(named: "pigguimageheart")
-            $0.contentMode = .scaleAspectFit
+            $0.image = UIImage(named: "piggu_heart")
         }
     }
     
     override func setUI() {
         addSubviews(backgroundImageView,
                     postSubContentsView,
-                    piggoImageView,
                     emotionComponentView)
     }
     
@@ -55,13 +48,8 @@ final class PostContentsView: BaseView {
             $0.horizontalEdges.equalToSuperview().inset(5)
         }
         
-        piggoImageView.snp.makeConstraints {
-            $0.top.equalTo(postSubContentsView.snp.bottom).offset(15)
-            $0.centerX.equalToSuperview()
-        }
-        
         emotionComponentView.snp.makeConstraints {
-            $0.top.equalTo(piggoImageView.snp.bottom)
+            $0.top.equalTo(postSubContentsView.snp.bottom).offset(216)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(267)
             $0.height.equalTo(56)
