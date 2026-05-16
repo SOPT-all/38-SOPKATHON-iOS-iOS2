@@ -21,6 +21,8 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     private let addButton = PingoButton(buttonColor: .main500, titleColor: .white, title: "썰 추가하기")
     
+    private var stories: [PostDTO] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -110,21 +112,35 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     private func register() {
         collectionView.register(PostChipCell.self, forCellWithReuseIdentifier: PostChipCell.identifier)
     }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                            numberOfItemsInSection section: Int) -> Int {
-            return 10
+       
+    func configure(stories: [PostDTO]) {
+        self.stories = stories
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        return stories.count
+    }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("📦 cellForItemAt: \(indexPath.item)")
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: PostChipCell.identifier,
             for: indexPath
         ) as? PostChipCell else { return UICollectionViewCell() }
+        
+        let post = stories[indexPath.item]
+        cell.configure(
+            title: post.title,
+            subtitle: post.preview
+        )
         return cell
     }
-    
+
     private static func make() -> UICollectionViewLayout {
 
         let itemSize = NSCollectionLayoutSize(
