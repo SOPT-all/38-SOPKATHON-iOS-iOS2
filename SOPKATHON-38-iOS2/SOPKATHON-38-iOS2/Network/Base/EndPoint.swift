@@ -11,12 +11,16 @@ enum EndPoint {
     case testPost
     case test(Int)
     case parameterExample
+    case getStoryDetail(Int)
     
     var requestType: HTTPMethodType {
         switch self {
         case .testPost:
             return .post
-        case .test, .parameterExample:
+            
+        case .test,
+             .parameterExample,
+             .getStoryDetail:
             return .get
         }
     }
@@ -25,20 +29,26 @@ enum EndPoint {
         switch self {
         case .testPost:
             return "/api/v1/"
+            
         case .test(let id):
             return "/api/v1/test/\(id)/"
+            
         case .parameterExample:
             return "/api/v1/test?name=kim"
-
+            
+        case .getStoryDetail(let storyId):
+            return "/api/v1/stories/\(storyId)"
         }
     }
     
     var header: [String: String] {
         switch self {
         case .testPost, .test:
-            HeaderType.basic.value
-        case .parameterExample:
-            HeaderType.auth.value
+            return HeaderType.basic.value
+            
+        case .parameterExample,
+             .getStoryDetail:
+            return HeaderType.auth.value
         }
     }
 }
