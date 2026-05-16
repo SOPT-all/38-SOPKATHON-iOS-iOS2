@@ -87,8 +87,8 @@ final class HomeView: BaseView {
         }
         
         pinChipView3.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(319)
-            $0.top.equalToSuperview().inset(31)
+            $0.trailing.equalToSuperview().inset(31)
+            $0.bottom.equalToSuperview().inset(35)
         }
     }
     

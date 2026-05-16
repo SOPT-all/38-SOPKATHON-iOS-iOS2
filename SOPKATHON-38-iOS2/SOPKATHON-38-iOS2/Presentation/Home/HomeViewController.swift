@@ -10,8 +10,19 @@ import UIKit
 class HomeViewController: BaseViewController {
     private let homeView = HomeView()
     
-    override func loadView() {
-        view = homeView
+    override var contentRootView: UIView? {
+        return homeView
+    }
+    
+    override var shouldShowNavigationBar: Bool {
+        return true
+    }
+    
+    override func configureNavigationBar() {
+        navigationBar.configure (
+            title: "성수동 카페거리",
+            showBackButton: false,
+        )
     }
     
     override func setAddTarget() {
@@ -20,6 +31,19 @@ class HomeViewController: BaseViewController {
     
     @objc
     func buttonDidTap() {
-        print("느낌표 버튼 탭")
+        let postListViewController = PostListViewController()
+        postListViewController.modalPresentationStyle = .pageSheet
+        
+        if let sheet = postListViewController.sheetPresentationController {
+            sheet.detents = [
+                .custom(identifier: .init("postList")) { _ in
+                    return 344
+                }
+            ]
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 20
+        }
+        
+        present(postListViewController, animated: true)
     }
 }

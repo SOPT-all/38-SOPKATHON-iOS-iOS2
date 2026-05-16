@@ -16,11 +16,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let viewController = ViewController()
+        let viewController = LaunchingScreenViewController()
         
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
+        
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            self?.switchToMainTabBarController()
+        }
+    }
+    
+    @MainActor
+    private func switchToMainTabBarController() {
+        guard let window else { return }
+        let mainTabBarController = MainTabBarController()
+        
+        UIView.transition(
+            with: window,
+            duration: 0.3,
+            options: .transitionCrossDissolve,
+            animations: {
+                window.rootViewController = mainTabBarController
+            }
+        )
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -53,4 +73,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
