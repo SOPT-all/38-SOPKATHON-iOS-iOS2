@@ -104,4 +104,9 @@ class PostSubContentsView: BaseView {
             $0.bottom.lessThanOrEqualToSuperview()
         }
     }
+    
+    func configure(title: String, content: String) {
+        titleLabel.text = title
+        contentLabel.text = content
+    }
 }

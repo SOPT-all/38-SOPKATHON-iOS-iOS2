@@ -51,7 +51,7 @@ final class PostListViewController: UIViewController {
         let postDetailViewController = PostDetailViewController()
     
         
-            present(postDetailViewController, animated: true)
+//            present(postDetailViewController, animated: true)
         guard let presentingViewController else {
             return
         }

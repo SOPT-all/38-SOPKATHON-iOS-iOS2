@@ -14,7 +14,7 @@ final class PostContentsView: BaseView {
     
     // MARK: - UI Components
     
-    private let postSubContentsView = PostSubContentsView()
+    let postSubContentsView = PostSubContentsView()
     private let backgroundImageView = UIImageView()
     private let emotionComponentView = EmotionComponentView()
     
