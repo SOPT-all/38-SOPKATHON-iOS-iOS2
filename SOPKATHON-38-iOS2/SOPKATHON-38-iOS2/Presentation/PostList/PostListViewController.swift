@@ -10,17 +10,33 @@ import UIKit
 final class PostListViewController: UIViewController {
     
     private let postListView = PostListView()
+    private let postService: PostService = DefaultPostService()
+    private var stories: [PostDTO] = []
     
     override func loadView() {
         view = postListView
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getPosts()
         
         postListView.addTargetToAddButton(self, action: #selector(addButtonDidTap))
         postListView.onCellSelect = { [weak self] _ in
             self?.showPostDetailViewController()
+        }
+    }
+    
+    private func getPosts() {
+        Task {
+            do {
+                let response = try await postService.getPost(userId: 1)
+                await MainActor.run {
+                    self.stories = response.stories
+                    self.postListView.configure(stories: self.stories)
+                }
+            } catch {
+                print("🔴 에러: \(error)")
+            }
         }
     }
     
@@ -31,12 +47,12 @@ final class PostListViewController: UIViewController {
         
         presentAfterDismiss(addPostViewController)
     }
-    
     private func showPostDetailViewController() {
         let postDetailViewController = PostDetailViewController()
+    
         
-        guard let presentingViewController else {
             present(postDetailViewController, animated: true)
+        guard let presentingViewController else {
             return
         }
         

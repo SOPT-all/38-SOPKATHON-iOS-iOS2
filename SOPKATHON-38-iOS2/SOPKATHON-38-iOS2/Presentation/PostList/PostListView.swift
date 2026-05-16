@@ -23,6 +23,8 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     private let addButton = PingoButton(buttonColor: .main500, titleColor: .white, title: "썰 추가하기")
     
+    private var stories: [PostDTO] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -114,46 +116,66 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
         collectionView.register(PostChipCell.self, forCellWithReuseIdentifier: PostChipCell.identifier)
     }
     
+    func configure(stories: [PostDTO]) {
+        self.stories = stories
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
+    
     func addTargetToAddButton(_ target: Any?, action: Selector) {
         addButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
+    // MARK: - UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView,
-                            numberOfItemsInSection section: Int) -> Int {
-            return 10
-        }
-
+                        numberOfItemsInSection section: Int) -> Int {
+        return stories.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: PostChipCell.identifier,
             for: indexPath
         ) as? PostChipCell else { return UICollectionViewCell() }
+        
+        let post = stories[indexPath.item]
+        cell.configure(
+            title: post.title,
+            subtitle: post.preview
+        )
         return cell
     }
+    
+    // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         onCellSelect?(indexPath)
     }
     
+    // MARK: - Layout
+    
     private static func make() -> UICollectionViewLayout {
-
+        
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .absolute(150),
             heightDimension: .absolute(150)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+        
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: itemSize,
             subitems: [item]
         )
-
+        
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
         section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
         section.orthogonalScrollingBehavior = .continuous
-
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

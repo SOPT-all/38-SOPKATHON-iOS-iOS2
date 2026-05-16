@@ -8,7 +8,8 @@
 import Foundation
 
 struct BaseResponseDTO<T: Decodable> : Decodable {
-    let code: Int
-    let msg: String
+    let success: Bool
+    let code: String
+    let message: String
     let data: T?
 }
