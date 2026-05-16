@@ -19,6 +19,8 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: make())
     
+    private let addButton = PingoButton(buttonColor: .main500, titleColor: .white, title: "썰 추가하기")
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -63,6 +65,12 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(150)
         }
+        
+        addButton.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom).offset(24)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(48)
+        }
     }
     
     override func setStyle() {
@@ -88,6 +96,10 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
             $0.backgroundColor = .gray100
             $0.showsHorizontalScrollIndicator = false
             $0.clipsToBounds = false
+        }
+        
+        addButton.do {
+            $0.titleLabel?.font = .body_sb_16
         }
     }
     
