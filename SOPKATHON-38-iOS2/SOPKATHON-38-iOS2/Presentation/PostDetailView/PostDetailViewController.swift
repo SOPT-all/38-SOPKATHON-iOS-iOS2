@@ -61,8 +61,7 @@ final class PostDetailViewController: BaseViewController {
         )
         
         commentBoxView.addSubview(postCommentView)
-        
-        navigationBar.configure(
+    }
     // MARK: - Custom Methods
 
     override func configureNavigationBar() {
