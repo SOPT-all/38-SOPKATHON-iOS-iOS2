@@ -2,7 +2,8 @@
 38기 솝커톤 iOS 2팀 iOS PINGO 레포
 
 # 서비스 소개
-
+## P!NGO!
+AI가 따라할 수 없는 것. 무거운 경험을 때로는 가벼운 웃음으로 넘기는 센스와 오프라인 경험이라고 생각했습니다. 특정 장소에 위치하면 다른 사람의 개인적이고 사소한 경험을 공유할 수 있는 서비스입니다. 
 
 ##  iOS Developer
 | **[이상엽](https://github.com/gleamminn)** | **[김세령](https://github.com/mansuiki)** | **[최주희](https://github.com/ser0kim)** |
@@ -11,7 +12,11 @@
 | `iOS Lead Developer` | `iOS Developer` | `iOS Developer` |
 | `MAP View(AvatarControll), CreatePostView` | `PostDetailView(View Full Text API)` | `PostListView(PostList GET API)` |
 
-# 주요 기능 및 기술 스택
+# 주요 기능
+1. 아바타 지도 기능
+2. 느낌표 썰 프리뷰 기능
+3. 썰 전문 & 반응시 캐릭터 변경 기능
+4. 썰 추가하기 기능
 
 ## Library & Framework
 
@@ -21,6 +26,7 @@
 | **Layout** | **SnapKit** | 코드 기반의 Auto Layout을 직관적이고 간결하게 적용 |
 | **Utility** | **Then** | 선언적 코드 작성을 통한 UI 초기화 로직의 응집도 최적화 |
 | **Architecture** | **MVC** | 단기간 개발 및 프로젝트 규모를 고려한 생산성 중심의 아키텍처 채택 |
+| **Network** | **URLSession** | 애플의 기본 제공 네트워크 요청 API |
 
 
 ## 💺 Git Flow
