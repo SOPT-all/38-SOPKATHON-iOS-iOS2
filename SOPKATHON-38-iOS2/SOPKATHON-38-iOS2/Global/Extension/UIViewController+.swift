@@ -8,6 +8,12 @@
 import UIKit
 
 extension UIViewController {
+    
+    var statusBarHeight: CGFloat {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        return windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+    }
 
     /// 키보드 위 화면 터치 시, 키보드 내리기
     func hideKeyboardWhenTappedAround() {
