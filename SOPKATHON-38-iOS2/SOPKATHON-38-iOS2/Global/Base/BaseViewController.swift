@@ -7,11 +7,18 @@
 
 import UIKit
 
+import SnapKit
+
 class BaseViewController: UIViewController {
+    
+    let navigationBar = TopNavigationBar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad 호출 - \(type(of: self))")
+        
+        baseSetUI()
+        baseSetLayout()
 
         setAddTarget()
         setDelegate()
@@ -19,6 +26,7 @@ class BaseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         print("viewWillAppear 호출 - \(type(of: self))")
     }
     
@@ -35,6 +43,18 @@ class BaseViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("viewDidDisappear 호출 - \(type(of: self))")
+    }
+    
+    private func baseSetUI() {
+        view.addSubview(navigationBar)
+    }
+    
+    private func baseSetLayout() {
+        navigationBar.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(statusBarHeight + 60)
+        }
     }
 
     func setAddTarget() {}
