@@ -60,4 +60,4 @@ feat/#1
 ```
 # iOS 팀원들의 사진 (before)
 `너무 즐거워요!`
-<img width="4032" height="3024" alt="솝커톤 비포" src="https://github.com/user-attachments/assets/ea9d9c19-cdb3-47c1-90ad-dde1aed658a4" />
+<img width="300" alt="솝커톤 비포" src="https://github.com/user-attachments/assets/ea9d9c19-cdb3-47c1-90ad-dde1aed658a4" />
