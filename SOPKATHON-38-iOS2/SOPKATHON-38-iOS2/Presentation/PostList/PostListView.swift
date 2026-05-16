@@ -33,7 +33,7 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     }
     
     override func setUI() {
-        addSubviews(iconView, titleLabel1, titleLabel2, sortButton, collectionView)
+        addSubviews(iconView, titleLabel1, titleLabel2, sortButton, collectionView, addButton)
     }
     
     override func setLayout() {

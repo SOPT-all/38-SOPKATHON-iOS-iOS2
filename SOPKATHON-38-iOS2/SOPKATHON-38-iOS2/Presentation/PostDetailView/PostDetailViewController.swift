@@ -14,29 +14,22 @@ final class PostDetailViewController: BaseViewController {
     // MARK: - UI Components
     
     private let rootView = PostContentView()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUI()
-        setLayout()
+    
+    override var contentRootView: UIView? {
+        return rootView
+    }
+    
+    override var shouldShowNavigationBar: Bool {
+        return true
     }
     
     // MARK: - Custom Methods
-    
-    private func setUI() {
-        view.addSubview(rootView)
+
+    override func configureNavigationBar() {
         navigationBar.configure (
             title: "전문 읽기",
             showBackButton: false,
             backgroundColor: .gray300
         )
-    }
-    
-    private func setLayout() {
-        rootView.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
     }
 }
