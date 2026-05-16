@@ -18,6 +18,10 @@ AI가 따라할 수 없는 것. 무거운 경험을 때로는 가벼운 웃음�
 3. 썰 전문 & 반응시 캐릭터 변경 기능
 4. 썰 추가하기 기능
 
+# 서비스 시연 영상
+<img width="296" height="640" alt="Simulator Screen Recording - iPhone 13 mini - 2026-05-17 at 08 49 22" src="https://github.com/user-attachments/assets/2fb75e04-68d1-4445-b73f-08ff02630806" />
+
+
 ## Library & Framework
 
 | Category | Library / Framework | Description |
