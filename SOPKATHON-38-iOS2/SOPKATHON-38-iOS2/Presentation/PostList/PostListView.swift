@@ -12,6 +12,8 @@ import Then
 
 final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var onCellSelect: ((IndexPath) -> Void)?
+    
     private let iconView = UIImageView()
     private let titleLabel1 = UILabel()
     private let titleLabel2 = UILabel()
@@ -107,6 +109,7 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     private func setDelegate() {
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     private func register() {
@@ -117,6 +120,10 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
         self.stories = stories
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
+    
+    func addTargetToAddButton(_ target: Any?, action: Selector) {
+    }
+        addButton.addTarget(target, action: action, for: .touchUpInside)
         }
     }
 
@@ -140,7 +147,11 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
         )
         return cell
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onCellSelect?(indexPath)
+    }
+    
     private static func make() -> UICollectionViewLayout {
 
         let itemSize = NSCollectionLayoutSize(

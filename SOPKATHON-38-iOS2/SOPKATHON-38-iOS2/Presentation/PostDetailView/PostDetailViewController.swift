@@ -8,12 +8,16 @@
 import UIKit
 
 import SnapKit
+import Then
 
 final class PostDetailViewController: BaseViewController {
     
-    // MARK: - UI Components
-    
-    private let rootView = PostContentView()
+    private let rootView = UIView()
+    private let postContentsView = PostContentsView()
+    private let bubbleMessageView = BubbleMessageView()
+    private let grayLineView = UIView()
+    private let commentBoxView = UIView()
+    private let postCommentView = PostCommentView()
     
     override var contentRootView: UIView? {
         return rootView
@@ -23,13 +27,86 @@ final class PostDetailViewController: BaseViewController {
         return true
     }
     
-    // MARK: - Custom Methods
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setStyle()
+        setUI()
+        setLayout()
+    }
+    
     override func configureNavigationBar() {
-        navigationBar.configure (
+        navigationBar.configure(
             title: "전문 읽기",
-            showBackButton: false,
-            backgroundColor: .gray300
+            showBackButton: true
         )
+        
+        navigationBar.backButtonAction = { [weak self] in
+            guard let self else { return }
+            
+            if let navigationController {
+                navigationController.popViewController(animated: true)
+            } else {
+                dismiss(animated: true)
+            }
+        }
+    }
+    
+    private func setStyle() {
+        view.backgroundColor = .white
+        rootView.backgroundColor = .white
+        
+        grayLineView.do {
+            $0.backgroundColor = .gray200
+        }
+        
+        commentBoxView.do {
+            $0.backgroundColor = .white
+            $0.layer.shadowColor = UIColor.white.cgColor
+            $0.layer.shadowOpacity = 0.7
+            $0.layer.shadowRadius = 12
+            $0.layer.shadowOffset = CGSize(width: 0, height: -42)
+        }
+    }
+    
+    private func setUI() {
+        rootView.addSubviews(
+            postContentsView,
+            bubbleMessageView,
+            grayLineView,
+            commentBoxView
+        )
+        
+        commentBoxView.addSubview(postCommentView)
+    }
+    
+    private func setLayout() {
+        postContentsView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(479)
+        }
+        
+        bubbleMessageView.snp.makeConstraints {
+            $0.top.equalTo(postContentsView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(commentBoxView.snp.top)
+        }
+        
+        grayLineView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(commentBoxView.snp.top)
+            $0.height.equalTo(1)
+        }
+        
+        commentBoxView.snp.makeConstraints {
+            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.height.equalTo(84)
+        }
+        
+        postCommentView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(12)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(48)
+        }
     }
 }
