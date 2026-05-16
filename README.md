@@ -7,7 +7,7 @@
 ##  iOS Developer
 | **[이상엽](https://github.com/gleamminn)** | **[김세령](https://github.com/mansuiki)** | **[최주희](https://github.com/ser0kim)** |
 | :---: | :---: | :---: |
-| <img width="300" alt="듀레일 프로필1" src="https://github.com/user-attachments/assets/7deba07d-b9f3-44b0-98f8-3c55307f61d2" /> | <img width="300" alt="듀레일 프로필3" src="https://github.com/user-attachments/assets/07cd8edd-3060-403c-8770-dc4be7eb4c05" /> | <img width="300" alt="듀레일 프로필4-2" src="https://github.com/user-attachments/assets/3bb81cd7-81a3-4278-9f11-35f01a756305" /> | <img width="300" alt="듀레일 프로필4" src="https://github.com/user-attachments/assets/da51bdb4-d0de-4fb5-a560-69f5e634e69a" /> |
+| <img width="360" height="360" alt="가나디2" src="https://github.com/user-attachments/assets/7657f40e-1d65-4f71-83d0-6472088b75d2" /> | <img width="360" alt="가나디1" src="https://github.com/user-attachments/assets/0076a5aa-fa4b-4061-8ce6-3c7eeb01bfb9" /> | <img width="348" height="352" alt="가나디3" src="https://github.com/user-attachments/assets/0ee11853-12a1-4eab-b0d6-e9554cf0ac17" /> |
 | `iOS Lead Developer` | `iOS Developer` | `iOS Developer` |
 
 # 주요 기능 및 기술 스택
@@ -59,3 +59,5 @@ feat/#1
 [feat] #1 - 메인 UI 구현
 ```
 # iOS 팀원들의 사진 (before)
+`너무 즐거워요!`
+<img width="4032" height="3024" alt="솝커톤 비포" src="https://github.com/user-attachments/assets/ea9d9c19-cdb3-47c1-90ad-dde1aed658a4" />
