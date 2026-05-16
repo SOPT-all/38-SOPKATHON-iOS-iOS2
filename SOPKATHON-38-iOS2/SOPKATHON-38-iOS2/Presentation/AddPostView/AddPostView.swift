@@ -234,6 +234,10 @@ final class AddPostView: BaseView {
             button.addTarget(self, action: #selector(categoryButtonDidTap(_:)), for: .touchUpInside)
         }
     }
+    
+    func addTargetToSubmitButton(_ target: Any?, action: Selector) {
+        submitButton.addTarget(target, action: action, for: .touchUpInside)
+    }
 
     @objc private func categoryButtonDidTap(_ sender: UIButton) {
         selectedCategoryIndex = sender.tag

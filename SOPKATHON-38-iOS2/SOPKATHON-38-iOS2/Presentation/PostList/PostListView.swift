@@ -12,6 +12,8 @@ import Then
 
 final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var onCellSelect: ((IndexPath) -> Void)?
+    
     private let iconView = UIImageView()
     private let titleLabel1 = UILabel()
     private let titleLabel2 = UILabel()
@@ -105,10 +107,15 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     private func setDelegate() {
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     private func register() {
         collectionView.register(PostChipCell.self, forCellWithReuseIdentifier: PostChipCell.identifier)
+    }
+    
+    func addTargetToAddButton(_ target: Any?, action: Selector) {
+        addButton.addTarget(target, action: action, for: .touchUpInside)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -123,6 +130,10 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
             for: indexPath
         ) as? PostChipCell else { return UICollectionViewCell() }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onCellSelect?(indexPath)
     }
     
     private static func make() -> UICollectionViewLayout {
