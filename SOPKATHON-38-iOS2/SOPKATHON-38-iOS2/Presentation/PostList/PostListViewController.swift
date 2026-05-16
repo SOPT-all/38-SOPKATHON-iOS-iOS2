@@ -17,9 +17,9 @@ final class PostListViewController: UIViewController {
         view = postListView
     }
     override func viewDidLoad() {
-    
         super.viewDidLoad()
         getPosts()
+        
         postListView.addTargetToAddButton(self, action: #selector(addButtonDidTap))
         postListView.onCellSelect = { [weak self] _ in
             self?.showPostDetailViewController()
@@ -30,16 +30,16 @@ final class PostListViewController: UIViewController {
         Task {
             do {
                 let response = try await postService.getPost(userId: 1)
-                
                 await MainActor.run {
-                    self.postListView.configure(stories: self.stories)
                     self.stories = response.stories
+                    self.postListView.configure(stories: self.stories)
                 }
             } catch {
                 print("🔴 에러: \(error)")
             }
         }
     }
+    
     @objc
     private func addButtonDidTap() {
         let addPostViewController = AddPostViewController()
