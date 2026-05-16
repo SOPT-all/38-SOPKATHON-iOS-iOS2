@@ -69,3 +69,8 @@ feat/#1
 `너무 즐거워요!`
 
 <img width="300" alt="솝커톤 비포" src="https://github.com/user-attachments/assets/ea9d9c19-cdb3-47c1-90ad-dde1aed658a4" />
+
+# iOS 팀원들의 사진 (after)
+`너무 행복해요!`
+
+<img width="300" alt="솝커톤 비포" src="https://github.com/user-attachments/assets/3b28077d-45c0-41ea-8a11-6a93198b8f0d">
