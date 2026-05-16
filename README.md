@@ -9,7 +9,7 @@
 | :---: | :---: | :---: |
 | <img width="360" height="360" alt="가나디2" src="https://github.com/user-attachments/assets/7657f40e-1d65-4f71-83d0-6472088b75d2" /> | <img width="360" alt="가나디1" src="https://github.com/user-attachments/assets/0076a5aa-fa4b-4061-8ce6-3c7eeb01bfb9" /> | <img width="348" height="352" alt="가나디3" src="https://github.com/user-attachments/assets/0ee11853-12a1-4eab-b0d6-e9554cf0ac17" /> |
 | `iOS Lead Developer` | `iOS Developer` | `iOS Developer` |
-| `MAP View(AvatarControll), CreatePostView` | `PostDetailView(Expression of emotion API)` | `PostListView(PostList GET API)` |
+| `MAP View(AvatarControll), CreatePostView` | `PostDetailView(View Full Text API)` | `PostListView(PostList GET API)` |
 
 # 주요 기능 및 기술 스택
 
