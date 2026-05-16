@@ -14,6 +14,7 @@ final class PostDetailViewController: BaseViewController {
     // MARK: - UI Components
     
     private let rootView = PostContentsView()
+    private let bubbleMessageView = BubbleMessageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ final class PostDetailViewController: BaseViewController {
     
     private func setUI() {
         view.backgroundColor = .white
-        view.addSubview(rootView)
+        view.addSubviews(rootView, bubbleMessageView)
         navigationBar.configure (
             title: "전문 읽기",
             showBackButton: true
@@ -37,6 +38,12 @@ final class PostDetailViewController: BaseViewController {
         rootView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(479)
+        }
+        
+        bubbleMessageView.snp.makeConstraints {
+            $0.top.equalTo(rootView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
