@@ -11,14 +11,19 @@ import Then
 
 final class MainTabBarController: UITabBarController {
     
-    lazy var homeViewController: ViewController = ViewController().then {
-        $0.tabBarItem.title = "홈"
-        $0.tabBarItem.image = UIImage(systemName: "house.fill")
+    lazy var homeViewController: HomeViewController = HomeViewController().then {
+        $0.tabBarItem.title = "home"
+        $0.tabBarItem.image = UIImage(resource: .iconHome)
     }
     
     lazy var secondViewController: UIViewController = UIViewController().then {
-        $0.tabBarItem.title = "두번째"
-        $0.tabBarItem.image = UIImage(systemName: "person.fill")
+        $0.tabBarItem.title = "storage"
+        $0.tabBarItem.image = UIImage(resource: .iconStorage)
+    }
+    
+    lazy var profileViewController: UIViewController = UIViewController().then {
+        $0.tabBarItem.title = "my"
+        $0.tabBarItem.image = UIImage(resource: .iconProfile)
     }
     
     override func viewDidLoad() {
@@ -28,9 +33,9 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func setTabBar() {
-        tabBar.unselectedItemTintColor = .gray400
-        tabBar.tintColor = .gray900
-        tabBar.backgroundColor = .gray100
+        tabBar.unselectedItemTintColor = .gray300
+        tabBar.tintColor = .main500
+        tabBar.backgroundColor = .white
         tabBar.isTranslucent = false
         
         let tabBarAppearance = UITabBarAppearance()
@@ -46,9 +51,14 @@ final class MainTabBarController: UITabBarController {
             rootViewController: secondViewController
         )
         
+        let profileNavigationController = UINavigationController(
+            rootViewController: profileViewController
+        )
+        
         setViewControllers([
             homeNavigationController,
             secondNavigationController,
+            profileNavigationController
         ], animated: true)
     }
 }
