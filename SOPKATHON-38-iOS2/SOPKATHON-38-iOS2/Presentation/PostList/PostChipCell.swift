@@ -34,10 +34,10 @@ final class PostChipCell: UICollectionViewCell {
     private func setUI() {
         contentView
             .addSubviews(
+                thumbnailImageView,
                 titleLabel,
                 chevronImageView,
-                subtitleLabel,
-                thumbnailImageView
+                subtitleLabel
             )
     }
     
@@ -56,6 +56,11 @@ final class PostChipCell: UICollectionViewCell {
         subtitleLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalTo(titleLabel.snp.leading)
+        }
+        
+        thumbnailImageView.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.top)
+            $0.horizontalEdges.equalToSuperview()
         }
     }
     
@@ -84,6 +89,12 @@ final class PostChipCell: UICollectionViewCell {
             $0.textColor = .white
             $0.lineBreakMode = .byTruncatingTail
             $0.numberOfLines = 1
+        }
+        
+        thumbnailImageView.do {
+            $0.contentMode = .scaleAspectFill
+            $0.clipsToBounds = true
+            $0.backgroundColor = .gray400
         }
     }
 }
