@@ -136,7 +136,6 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: PostChipCell.identifier,
             for: indexPath
@@ -145,9 +144,19 @@ final class PostListView: BaseView, UICollectionViewDelegate, UICollectionViewDa
         let post = stories[indexPath.item]
         cell.configure(
             title: post.title,
-            subtitle: post.preview
+            subtitle: post.preview,
+            image: imageForIndex(indexPath.item)
         )
         return cell
+    }
+    
+    private func imageForIndex(_ index: Int) -> UIImage {
+        let images: [UIImage] = [
+            UIImage(resource: .imgCarousel1),
+            UIImage(resource: .imgCarousel2),
+            UIImage(resource: .imgCarousel3)
+        ]
+        return images[index % images.count]
     }
     
     // MARK: - UICollectionViewDelegate
